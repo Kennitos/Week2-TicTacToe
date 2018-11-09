@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -18,7 +19,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         game = new Game();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        Game savegame = game;
+        outState.putSerializable("save", savegame);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+
+
+        android.support.v7.widget.GridLayout gridLayout = findViewById(R.id.grid);
+        if(gridLayout == null) {
+            Log.d(" null", " gl");
+        }
+
+        if (savedInstanceState != null) {
+            game = (Game) savedInstanceState.getSerializable("save");
+            game.Restore(gridLayout);
+
+            Log.d(" grid", String.valueOf(gridLayout.getChildCount()));
+        }
     }
 
     public void tileClicked(View view) {
@@ -116,19 +143,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
-//for (int i = 1; i <= splitter.length; i++) {
-//        Button button = (Button) findViewById(getResources().getIdentifier("button" + i, "id",
-//        this.getPackageName()));
-//
-//        button.setText(spliter[i - 1]);
-//        }
-
-
-//    public void buttonClicked(View view) {
-//        Button button = (Button) findViewById(R.id.button1);
-//        button.setText('X');
-//
-//    }
-//}
