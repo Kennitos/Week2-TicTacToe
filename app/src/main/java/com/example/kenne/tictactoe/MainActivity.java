@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 
@@ -115,13 +116,16 @@ public class MainActivity extends AppCompatActivity {
         switch(status) {
             case DRAW:
                 result.setText("DRAW");
+                Toast.makeText(this,"It's a draw!",Toast.LENGTH_SHORT).show();
                 break;
             case PLAYER_ONE:
                 result.setText("PLAYER ONE WINS");
                 Log.d("PLAYER ONE WINS","message");
+                Toast.makeText(this,"Player one wins!",Toast.LENGTH_SHORT).show();
                 break;
             case PLAYER_TWO:
                 result.setText("PLAYER TWO WINS");
+                Toast.makeText(this,"Player two wins!",Toast.LENGTH_SHORT).show();
                 break;
             case IN_PROGRESS:
                 result.setText("IN PROGRESS");
